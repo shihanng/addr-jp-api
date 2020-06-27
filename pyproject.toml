@@ -8,6 +8,8 @@ authors = ["Shi Han NG <shihanng@gmail.com>"]
 python = "^3.8"
 
 [tool.poetry.dev-dependencies]
+datasette = "^0.44"
+csvs-to-sqlite = "^1.0"
 
 [build-system]
 requires = ["poetry>=0.12"]
