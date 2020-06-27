@@ -4,7 +4,7 @@
 curl -O https://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip
 unzip ken_all.zip
 iconv -t UTF-8 -f cp932 KEN_ALL.CSV > ADDR_JP.csv
-sed -i 1i"jis_x0401,postcode_old,postcode,prefecture_kana,municipal_kana,town_kana,prefecture,municipal,town,has_multi_postcode,has_chome,shared_postcode,updated,updated_reason" ADDR_JP.csv
+sed -i 1i"jis_x0401,postcode_old,postcode,prefecture_kana,municipal_kana,town_kana,prefecture,municipal,town,has_multi_postcode,koaza,has_chome,shared_postcode,updated,updated_reason" ADDR_JP.csv
 ```
 
 - [Roman](https://www.post.japanpost.jp/zipcode/dl/roman-zip.html):
