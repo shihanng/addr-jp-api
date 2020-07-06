@@ -1,0 +1,16 @@
+name: Convert
+
+on: [push]
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    name: Convert
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Convert to db
+        uses: shihanng/csvs-to-sqlite-act@v1.0.0
+        with:
+          cli_args: -s, --replace-tables ADDR_EN.csv ADDR_JP.csv addr.db
+          working_directory: ./
