@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Convert to db
-        uses: shihanng/csvs-to-sqlite-act@v1.0.0
+        uses: shihanng/csvs-to-sqlite-act@v1.0.1
         with:
           cli_args: -s, --replace-tables ADDR_EN.csv ADDR_JP.csv addr.db
           working_directory: ./
