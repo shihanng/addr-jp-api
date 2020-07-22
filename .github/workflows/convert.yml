@@ -17,3 +17,6 @@ jobs:
         with:
           cli_args: -s, --replace-tables ADDR_EN.csv ADDR_JP.csv addr.db
           working_directory: ./raw_csv
+      - name: Checking
+        run: |
+          ls . raw_csv
