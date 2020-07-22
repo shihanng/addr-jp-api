@@ -1,6 +1,9 @@
 name: Convert
 
-on: [push]
+on:
+  push:
+    paths:
+      - "raw_csv/**.js"
 
 jobs:
   convert:
@@ -13,4 +16,4 @@ jobs:
         uses: shihanng/csvs-to-sqlite-act@v1.0.1
         with:
           cli_args: -s, --replace-tables ADDR_EN.csv ADDR_JP.csv addr.db
-          working_directory: ./
+          working_directory: ./raw_csv
