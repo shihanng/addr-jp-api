@@ -3,7 +3,7 @@ name: Convert
 on:
   push:
     paths:
-      - "raw_csv/**.js"
+      - "raw_csv/**.csv"
 
 jobs:
   convert:
