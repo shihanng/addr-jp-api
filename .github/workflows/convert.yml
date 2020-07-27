@@ -24,7 +24,7 @@ jobs:
       - name: Convert CSV to DB
         working-directory: ./raw_csv
         run: |
-          csvs-to-sqlite -s , --replace-tables ADDR_EN.csv ADDR_JP.csv addr.db
+          poetry run csvs-to-sqlite -s , --replace-tables ADDR_EN.csv ADDR_JP.csv addr.db
       - name: Checking
         run: |
           ls . raw_csv
