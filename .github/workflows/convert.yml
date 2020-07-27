@@ -2,21 +2,28 @@ name: Convert
 
 on:
   push:
-    paths:
-      - "raw_csv/**.csv"
+    branches:
+      - "**"
 
 jobs:
   convert:
     runs-on: ubuntu-latest
     name: Convert
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Convert to db
-        uses: shihanng/csvs-to-sqlite-act@v1.0.1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
         with:
-          cli_args: -s, --replace-tables ADDR_EN.csv ADDR_JP.csv addr.db
-          working_directory: ./raw_csv
+          python-version: "3.8.5"
+      - name: Install Poetry
+        run: |
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+      - name: Install dependencies
+        run: |
+          poetry install
+      - name: Convert CSV to DB
+        working-directory: ./raw_csv
+        run: |
+          csvs-to-sqlite -s , --replace-tables ADDR_EN.csv ADDR_JP.csv addr.db
       - name: Checking
         run: |
           ls . raw_csv
