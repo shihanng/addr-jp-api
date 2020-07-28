@@ -1,0 +1,33 @@
+name: Convert
+
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    name: Convert
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.8.5"
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+      - name: Install Poetry
+        run: |
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+          echo "::add-path::$HOME/.poetry/bin"
+      - name: Install dependencies
+        run: |
+          poetry install
+      - name: Convert CSV to DB
+        working-directory: ./raw_csv
+        run: |
+          poetry run csvs-to-sqlite -s , --replace-tables ADDR_EN.csv ADDR_JP.csv addr.db
