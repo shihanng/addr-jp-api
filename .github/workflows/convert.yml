@@ -27,6 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install
+          heroku plugins:install heroku-builds
       - name: Convert CSV to DB
         working-directory: ./raw_csv
         run: |
