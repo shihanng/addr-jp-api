@@ -35,4 +35,4 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
-          datasette publish heroku -n addr-jp-api ./raw_csv/addr.db
+          poetry run datasette publish heroku -n addr-jp-api ./raw_csv/addr.db
