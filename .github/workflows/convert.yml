@@ -1,4 +1,4 @@
-name: Convert
+name: Convert then Deploy
 
 on:
   push:
@@ -6,9 +6,9 @@ on:
       - "**"
 
 jobs:
-  convert:
+  convert-then-deploy:
     runs-on: ubuntu-latest
-    name: Convert
+    name: Convert CSV to DB then Deploy to Heroku
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -31,3 +31,8 @@ jobs:
         working-directory: ./raw_csv
         run: |
           poetry run csvs-to-sqlite -s , --replace-tables ADDR_EN.csv ADDR_JP.csv addr.db
+      - name: Deploy to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          datasette publish heroku -n addr-jp-api ./raw_csv/addr.db
