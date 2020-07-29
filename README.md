@@ -1,3 +1,7 @@
+# addr-jp-api
+
+[![CalVer](https://img.shields.io/badge/calver-YYYY.0M.0D-22bfda.svg)](https://calver.org/)
+
 ### Data Source
 
 - [Japanese](https://www.post.japanpost.jp/zipcode/dl/kogaki-zip.html):
