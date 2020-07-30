@@ -1,5 +1,8 @@
 name: Convert then Deploy
 
+env:
+  APP_NAME: addr-jp-api
+
 on:
   push:
     branches:
@@ -29,14 +32,13 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install
-          heroku plugins:install heroku-builds
       - name: Convert CSV to DB
-        working-directory: ./raw_csv
         run: |
-          poetry run csvs-to-sqlite -s , --replace-tables ADDR_EN.csv ADDR_JP.csv addr.db
+          make convert
       - name: Deploy to Heroku
         if: startsWith(github.ref, 'refs/tags/v') && github.event_name != 'pull_request'
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
-          poetry run datasette publish heroku -n addr-jp-api ./raw_csv/addr.db
+          heroku plugins:install heroku-builds
+          make deploy
